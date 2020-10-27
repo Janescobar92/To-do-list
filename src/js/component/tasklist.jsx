@@ -22,15 +22,31 @@ export function MyToDoList(e) {
 		task.splice(i, 1);
 		console.log(task);
 	};
-	// useEffect(() => {}, []);
 
-	// useEffect(() => {}, []);
+	const [listItem, setListItem] = useState(null);
 
+	useEffect(() => {
+		setListItem(
+			task.map((taskitem, i) => {
+				return (
+					<li key={i} className="myLi">
+						{taskitem}
+						<button
+							className="hide"
+							onClick={() => MyTaskDelete(i)}>
+							X
+						</button>
+					</li>
+				);
+			})
+		);
+	});
 	return (
-		<div>
+		<div className="card container">
 			<h1>To do List</h1>
 			<input
 				id="inputRecive"
+				className="myInput"
 				type="text"
 				placeholder="New Task"
 				onChange={e => MyTextValue(e)}
@@ -38,20 +54,10 @@ export function MyToDoList(e) {
 					MyTaskAdder(event);
 				}}
 			/>
-			<ul id="myUl">
-				{task.map((taskitem, i) => {
-					return (
-						<li key={i}>
-							{taskitem}
-							<button onClick={() => MyTaskDelete(i)}>X</button>
-						</li>
-					);
-				})}
+			<ul id="myUlist" className="myUl">
+				{listItem}
 			</ul>
-			<p>
-				{task.length}
-				<span>tareas</span>
-			</p>
+			<p>{task.length + ""} Tareas</p>
 		</div>
 	);
 }
