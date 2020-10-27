@@ -13,11 +13,12 @@ body {
 .myLi:hover{
 .hide {
   visibility: visible;
-  color: red;
+  color: rgb(255, 81, 0);
 } 
 }
 .card{
     width:30rem;
+    background-color: #f2e9a6;
 }
 .myLi{
    margin: 0 auto; 
@@ -27,6 +28,7 @@ body {
     list-style-type: none;
 }
 .myInput{
+    text-align: center;
     margin: 0 auto; 
    width: 50%;  
 }

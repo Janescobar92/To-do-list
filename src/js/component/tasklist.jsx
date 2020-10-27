@@ -32,9 +32,9 @@ export function MyToDoList(e) {
 					<li key={i} className="myLi">
 						{taskitem}
 						<button
-							className="hide"
+							className="hide btn"
 							onClick={() => MyTaskDelete(i)}>
-							X
+							<i className="far fa-times-circle" />
 						</button>
 					</li>
 				);
