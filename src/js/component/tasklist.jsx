@@ -1,62 +1,57 @@
 import React, { useState, useEffect } from "react";
+import { Button } from "bootstrap";
 
 export function MyToDoList(e) {
 	const [task, setTask] = useState([]);
 	const [text, setText] = useState("");
-
 	let MyTextValue = e => {
 		setText(e.target.value);
-		// console.log(text);
 	};
 	let MyTaskAdder = event => {
-		// event.preventDefault();
 		if (event.key === "Enter") {
-			setTask(task => [...task, text]);
-			// setTask(task.push(text));
-			// console.log(task);
-			// console.log(text);
-			MyListGenerator();
+			let newTask = event.target.value;
+			if (newTask) {
+				setTask(task => [...task, text]);
+				// console.log(task);
+				let myList = document.querySelector("#inputRecive");
+				myList.value = "";
+			}
 		}
 	};
+	let MyTaskDelete = i => {
+		task.splice(i, 1);
+		console.log(task);
+	};
+	// useEffect(() => {}, []);
 
-	// let MyListGenerator = () => {
-	// 	let myList = document.querySelector("#inputRecive");
-	// 	if (!task.length == 0) {
-	// 		console.log("condicion admitida");
-	// 		task.map((taskitem, i) => {
-	// 			return <li key="task">{taskitem}</li>;
-	// 		});
-	// 	} else {
-	// 		<li key="task">{"No task added"}</li>;
-	// 		console.log("fail");
-	// 	}
-	// };
-	useEffect(
-		() => {
-			let myList = document.querySelector("#inputRecive");
-			if (!task.length == 0) {
-				console.log("condicion admitida");
-				task.map((taskitem, i) => {
-					return <li key="task">{taskitem}</li>;
-				});
-			} else {
-				<li key="task">{"No task added"}</li>;
-				console.log("fail");
-			}
-		},
-		[task]
-	);
+	// useEffect(() => {}, []);
 
 	return (
 		<div>
+			<h1>To do List</h1>
 			<input
 				id="inputRecive"
 				type="text"
 				placeholder="New Task"
 				onChange={e => MyTextValue(e)}
-				onKeyPress={event => MyTaskAdder(event)}
+				onKeyPress={event => {
+					MyTaskAdder(event);
+				}}
 			/>
-			<ul id="myUl">{}</ul>
+			<ul id="myUl">
+				{task.map((taskitem, i) => {
+					return (
+						<li key={i}>
+							{taskitem}
+							<button onClick={() => MyTaskDelete(i)}>X</button>
+						</li>
+					);
+				})}
+			</ul>
+			<p>
+				{task.length}
+				<span>tareas</span>
+			</p>
 		</div>
 	);
 }
